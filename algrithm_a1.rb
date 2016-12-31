@@ -205,3 +205,63 @@ def expand(s, left, right)
   end
   right - left - 1
 end
+
+# 6
+def convert(s, num_rows)
+  return s if s.length < 3 || num_rows < 2
+  result = ""
+  i = 0
+  length = s.length
+  lag = 2 * (num_rows - 1)
+  while i < num_rows
+    j = i
+    while j < length
+      result += s[j]
+      if i > 0 && i < num_rows - 1
+        t = j + lag - 2 * i
+        if t < length
+          result += s[t]
+        end
+      end
+      j += lag
+    end
+    i += 1
+  end
+  result
+end
+
+# 7
+def reverse(x)
+  nums = ["9", "8", "7", "6", "5", "4", "3", "2", "1", "0"]
+  digits = x.to_s.split("")
+  if nums.include?(digits[0])
+    result = digits.reverse.join("").to_i
+  else
+    result = 0 - digits.reverse.join("").to_i
+  end
+  return result.between?(-2147483648, 2147483647) ? result : 0
+end
+
+
+# 8
+
+
+# 9
+def is_palindrome(x)
+  if x < 0
+    return false
+  elsif x == 0
+    return true
+  elsif x % 10 == 0
+    return false
+  end
+
+  result = 0
+  num = x
+  while result < num
+    result = result * 10 + num % 10
+    num = num / 10
+  end
+
+  return result == num || result / 10 == num
+end

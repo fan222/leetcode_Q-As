@@ -51,3 +51,48 @@
 # 5
 # Given a string s, find the longest palindromic substring in s.
 # You may assume that the maximum length of s is 1000.
+
+
+# 6
+# The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)
+#
+# P   A   H   N
+# A P L S I I G
+# Y   I   R
+# And then read line by line: "PAHNAPLSIIGYIR"
+
+
+# 7
+# Reverse digits of an integer.
+#
+# Example1: x = 123, return 321
+# Example2: x = -123, return -321
+
+
+# 8. String to Integer (atoi)
+
+
+# 9
+# Determine whether an integer is a palindrome.
+# Do this without extra space.
+
+
+# 10
+# Implement regular expression matching with support for '.' and '*'.
+#
+# '.' Matches any single character.
+# '*' Matches zero or more of the preceding element.
+#
+# The matching should cover the entire input string (not partial).
+#
+# The function prototype should be:
+# bool isMatch(const char *s, const char *p)
+#
+# Some examples:
+# isMatch("aa","a") → false
+# isMatch("aa","aa") → true
+# isMatch("aaa","aa") → false
+# isMatch("aa", "a*") → true
+# isMatch("aa", ".*") → true
+# isMatch("ab", ".*") → true
+# isMatch("aab", "c*a*b") → true
