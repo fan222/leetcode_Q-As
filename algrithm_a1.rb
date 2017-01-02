@@ -265,3 +265,71 @@ def is_palindrome(x)
 
   return result == num || result / 10 == num
 end
+
+
+# 10
+
+
+# 55
+def can_jump(nums)
+    length = nums.length
+    return true if length < 2
+    (length-2).downto(0).each do |idx|
+        if nums[idx] == 0
+           needed_jump = 1
+           while needed_jump > nums[idx]
+            needed_jump += 1
+            idx -= 1
+            return false if idx < 0
+            end
+        end
+    end
+    true
+end
+
+
+# 56
+def merge(intervals)
+  result = []
+  new_intervals = intervals.sort_by{|interval| interval.start}
+  new_intervals.each do |interval|
+    if result.empty?
+      result.push(interval)
+    elsif result.last.end >= interval.start
+      result[-1] = Interval.new(result[-1].start, [result[-1].end, interval.end].max)
+    else
+      result.push(interval)
+    end
+  end
+  result
+end
+
+
+# 57
+def insert(intervals, new_interval)
+    s, e = new_interval.start, new_interval.end
+    left, right = [], []
+    intervals.each do |interval|
+        if interval.end < s
+            left.push(interval)
+        elsif interval.start > e
+            right.push(interval)
+        else
+            s = [s, interval.start].min
+            e = [e, interval.end].max
+        end
+    end
+    left+[Interval.new(s, e)]+right
+end
+
+
+# 461
+def hamming_distance(x, y)
+    str = x ^ y
+    str = str.to_s(2)
+    result = 0
+    str.each_char do |char|
+       result += 1 if char == "1"
+    end
+    result
+end
