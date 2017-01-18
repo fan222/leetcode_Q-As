@@ -270,6 +270,26 @@ end
 # 10
 
 
+# 20
+def is_valid(s)
+    left = ['(', '{', '[']
+    right = [')', '}', ']']
+    stk = []
+    s.each_char do |char|
+        if left.index(char)
+            stk.push(char)
+        else
+            if !stk.empty? && stk.last == left[right.index(char)]
+                stk.pop
+            else
+                return false
+            end
+        end
+    end
+    stk.empty?
+end
+
+
 # 55
 def can_jump(nums)
     length = nums.length
@@ -320,6 +340,100 @@ def insert(intervals, new_interval)
         end
     end
     left+[Interval.new(s, e)]+right
+end
+
+# 84
+def largest_rectangle_area(height)
+  maxarea = 0
+  height, stack = (height << 0), [-1]
+
+  height.each_with_index do |h, i|
+    while h < height[stack[-1]]
+      subarea = height[stack.pop] * (i - 1 - stack[-1])
+      maxarea = subarea if maxarea < subarea
+    end
+    stack.push(i)
+  end
+
+  maxarea
+end
+
+
+# 155
+class MyStack
+  def initialize(store = [])
+    @store = store
+  end
+
+  def empty?
+    @store.empty?
+  end
+
+  def peek
+    @store.last
+  end
+
+  def pop
+    @store.pop
+  end
+
+  def push(val)
+    @store.push(val)
+  end
+
+  def size
+    @store.size
+  end
+end
+
+class MinMaxStack
+  def initialize
+    @store = MyStack.new
+  end
+
+  def empty?
+    @store.empty?
+  end
+
+  def min
+    @store.peek[:min] unless empty?
+  end
+
+  def max
+    @store.peek[:max] unless empty?
+  end
+
+  def peek
+    @store.peek[:value] unless empty?
+  end
+
+  def pop
+    @store.pop[:value] unless empty?
+  end
+
+  def push(val)
+    # By using a little extra memory, we can get the max simply by peeking,
+    # which is O(1).
+    @store.push({
+      max: new_max(val),
+      min: new_min(val),
+      value: val
+    })
+  end
+
+  def size
+    @store.size
+  end
+
+  private
+
+  def new_max(val)
+    empty? ? val : [max, val].max
+  end
+
+  def new_min(val)
+    empty? ? val : [min, val].min
+  end
 end
 
 

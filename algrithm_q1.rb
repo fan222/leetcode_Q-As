@@ -98,6 +98,12 @@
 # isMatch("aab", "c*a*b") → true
 
 
+# 20
+# Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+#
+# The brackets must close in the correct order, "()" and "()[]{}" are all valid but "(]" and "([)]" are not.
+
+
 # 55
 # Given an array of non-negative integers, you are initially positioned at the first index of the array.
 #
@@ -131,6 +137,9 @@
 # Given [1,2],[3,5],[6,7],[8,10],[12,16], insert and merge [4,9] in as [1,2],[3,10],[12,16].
 #
 # This is because the new interval [4,9] overlaps with [3,5],[6,7],[8,10].
+
+
+# 155 min stack
 
 
 # 461
