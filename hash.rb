@@ -99,3 +99,22 @@ def island_perimeter(grid)
     end
     islands * 4 - neighbor * 2
 end
+
+# Intersection of Two Arrays II
+def intersect(nums1, nums2)
+    h = {}
+    result = []
+    nums1.each do |num|
+       h[num] ? h[num] += 1 : h[num] = 1
+    end
+
+    nums2.each do |num|
+       if h[num]
+           if h[num] > 0
+            result.push(num)
+            h[num] -= 1
+           end
+       end
+    end
+    result
+end
