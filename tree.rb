@@ -203,3 +203,41 @@ def getHeight(root)
    return false if !r || !l || ((l - r).abs > 1)
    1 + [r, l].max
 end
+
+# 501. Find Mode in Binary Search Tree
+var findMode = function(root) {
+    if (root === null) {
+        return [];
+    }
+    var h = {};
+    var max = 0;
+    traverse(root, h);
+    var res = [];
+    Object.keys(h).forEach( function(key) {
+        if (h[key] > max) {
+            max = h[key];
+        }
+    })
+    Object.keys(h).forEach( function(key) {
+        if (h[key] === max) {
+            res.push(parseInt(key));
+        }
+    })
+    return res;
+};
+
+var traverse = function(root, h) {
+    if(h[root.val]) {
+        h[root.val] += 1;
+    } else {
+        h[root.val] = 1;
+    }
+
+    if(root.left !== null) {
+        traverse(root.left, h);
+    }
+
+    if(root.right !== null) {
+        traverse(root.right, h);
+    }
+}
