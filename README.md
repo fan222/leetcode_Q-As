@@ -68,3 +68,57 @@ c) at i index: array - O(n); linked list - O(n)
 
 Reverse look-up.
 Extra memory for pointer to previous node.
+
+## Stack
+
+A collection with the restriction that insertion and deletion can be performed only from on end, called the top.
+
+Operations:
+1) push(x), O(1) best, O(n) worst, O(1) average
+2) pop(x)
+3) top()
+4) isEmpty?()
+constant time
+
+Application:
+1) function calls / recursion
+2) undo in an editor
+3) balanced parentheses
+
+### Implementation of stacks
+
+We can implement stacks using array and linked list.
+
+1) Array implementation
+top: track stack top
+overflow: dynamic array
+
+2) Linked list implementation
+insert / delete at beginning
+
+Application:
+using stack to reverse a string(could be solved with two indices and swapping);
+using stack to reverse a linked list - last opened, first closed.
+
+## Queue
+
+A collection with the restriction that insertion can be performed at one end (rear) and deletion can be performed at other end (front).
+
+Operations:
+1) enqueue(x)
+2) dequeue()
+3) front() or peek()
+4) isEmpty?()
+constant time.
+
+Application:
+Requests must be queued to be served by shared resources.
+1) Printer queue
+2) Process scheduling
+3) simulating wait
+
+a) Array implementation
+circular array
+double size when full
+b) Linked list implementation
+keep tracking front and rear

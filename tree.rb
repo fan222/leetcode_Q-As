@@ -241,3 +241,84 @@ var traverse = function(root, h) {
         traverse(root.right, h);
     }
 }
+
+# 103. Binary Tree Zigzag Level Order Traversal
+def zigzag_level_order(root)
+    return [] if root.nil?
+    result = []
+    helper(root, 0, result)
+    result
+end
+
+def helper(node, level, result)
+   if level + 1 > result.length
+      result.push([])
+   end
+
+   level%2 == 0 ? result[level].push(node.val) : result[level].unshift(node.val)
+   helper(node.left, level + 1, result) if !node.left.nil?
+   helper(node.right, level + 1, result) if !node.right.nil?
+end
+
+# 94. Binary Tree Inorder Traversal
+# helper method and side effect
+def inorder_traversal(root)
+    result = []
+    i_t(root, result)
+    result
+end
+
+def i_t(root, result)
+   return if root.nil?
+   i_t(root.left, result)
+   result.push(root.val)
+   i_t(root.right, result)
+end
+
+def inorder_traversal(root)
+    result = []
+    stk = []
+    return [] if root.nil?
+    cur = root
+    while !(cur.nil?) || !(stk.empty?)
+        while !cur.nil?
+            stk.push(cur)
+            cur = cur.left
+        end
+        cur = stk.pop
+        result.push(cur.val)
+        cur = cur.right
+    end
+    result
+end
+
+# 144. Binary Tree Preorder Traversal
+def preorder_traversal(root)
+    result = []
+    p_r(root, result)
+    result
+end
+
+def p_r(root, result)
+   return if root.nil?
+   result.push(root.val)
+   p_r(root.left, result)
+   p_r(root.right, result)
+end
+
+def preorder_traversal(root)
+    result = []
+    stk = []
+    return [] if root.nil?
+    cur = root
+    while !cur.nil? || !stk.empty?
+        while !cur.nil?
+          result.push(cur.val)
+          stk.push(cur)
+          cur = cur.left
+        end
+        cur = stk.pop
+        cur = cur.right
+    end
+    result
+end
