@@ -12,6 +12,13 @@ ADTs define data and operations, but no Implementation. We need to study their:
 3) cost of operations
 4) Implementation
 
+How should I decide which data structure to use?
+
+ - [ ] what needs to be stored
+ - [ ] cost of operations
+ - [ ] memory usage
+ - [ ] ease of implementation
+
 ## List as abstract data type
 
 Static:
@@ -122,3 +129,53 @@ circular array
 double size when full
 b) Linked list implementation
 keep tracking front and rear
+
+## Tree
+
+A collection of nodes that represent hierarchical relations.
+
+Tree is recursive data structure.
+
+Depth of node x is number of edges in path from root to x.
+
+Height of node x is number of edges in longest path from x to a leaf.
+
+Application:
+1) storing naturally hierarchical data, eg: file system
+2) organize data for quick search, insertion, deletion
+3) trie for dictionary
+4) network routing algorithm
+
+### Binary Tree
+
+A tree in which each node can have at most 2 children.
+
+Strict/proper binary tree: each node can have either 2 or 0 children.
+
+Complete binary tree: all levels except possibly the last are complete filled and all nodes are as left as possible.
+
+Max number of nodes at level i is 2**i.
+
+Max number of nodes in a binary tree with height h is 2*(h+1) - 1
+
+Balanced binary tree: difference between height of left and right subtree for every node is not more than k (mostly 1).
+
+#### implementation
+We can implement binary tree using:
+1) dynamically created nodes
+2) arrays, store level by level: for complete binary tree, left child index 2*i + 1, right child index 2*i + 2
+
+### BST
+
+A binary tree in which for each node, value of all the nodes in left subtree is less or equal and value of all the nodes in the right subtree is greater.
+
+search, insert and remove are O(log n). (assure this if keep BST balanced)
+
+#### Tree Traversal
+
+Process of visiting each node in the tree exactly once in some order.
+
+a) breadth first / level-order traversal
+    implement using queue, time complexity O(n), space complexity worst O(n) best O(1)
+b) depth first: in-order, left subtree, node, right subtree
+    (implicit) space complexity O(height), worst O(n), best O(log n)

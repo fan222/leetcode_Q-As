@@ -135,7 +135,7 @@ def invert_tree(root)
     root
 end
 
-# 104. Maximum Depth of Binary Tree
+# 104. Maximum Depth of Binary Tree, O(n)
 def max_depth(root)
     return 0 if root.nil?
     1 + [max_depth(root.left), max_depth(root.right)].max
