@@ -179,3 +179,9 @@ a) breadth first / level-order traversal
     implement using queue, time complexity O(n), space complexity worst O(n) best O(1)
 b) depth first: in-order, left subtree, node, right subtree
     (implicit) space complexity O(height), worst O(n), best O(log n)
+
+## Graphs
+
+A graph G is an ordered pair of a set V of vertices and a set E of edges.
+
+Web-crawling is graph traversal.
