@@ -113,3 +113,89 @@ var getSuccessor = function(root, val) {
     return successor;
   }
 };
+
+// Binary search - finding first or last occurrence of a number
+// sorted array, finding first or last occurrence of a number
+// iterative binary search
+var bSearchFirst = function(arr, target) {
+  var low = 0;
+  var high = arr.length - 1;
+  var result = -1;
+  while (low <= high) {
+    var mid = parseInt((low + high) / 2);
+    if (arr[mid] === target) {
+      result = mid;
+      high = mid - 1;
+      // low = mid + 1;
+    } else if (arr[mid] < target) {
+      low = mid + 1;
+    } else {
+      high = mid - 1;
+    }
+  }
+  return result;
+};
+
+// Count occurrences of a number in a sorted array with duplicates using Binary Search
+// O(log n)
+var findCount = function(arr, target) {
+  var first  = bSearchFirst(arr, target);
+  if (first >= 0) {
+    var last = bSearchLast(arr, target);
+    return last - first + 1;
+  }
+  return 0;
+};
+
+// How many times is a sorted array rotated?
+// index of minimum element
+// discard half each loop
+// find the abnormal
+var fundRotationCount = function(arr) {
+  var n = arr.length;
+  var low = 0;
+  var high = n - 1;
+  while (low <= high) {
+    if (arr[low] <= arr[high]) {
+      return low;
+    }
+    var mid = parseInt((low + high) / 2);
+    var next = (mid + 1) % n;
+    var prev = (mid + n - 1) % n;
+    if (arr[mid] <= next && arr[mid] <= prev) {
+      return mid;
+    } else if (arr[mid] <= arr[high]) {
+      high = mid - 1;
+    } else if (arr[mid] >= arr[low]) {
+      low = mid + 1;
+    }
+  }
+  return -1;
+};
+
+// Search element in a circular sorted array
+// discard half anyway
+var bSearchInrotated = function(arr, target) {
+  var low = 0;
+  var high = arr.length - 1;
+  while (low <= high) {
+    var mid = parseInt((low + high) / 2);
+    if (arr[mid] === target) {
+      return mid;
+    }
+    if (arr[mid] <= arr[high]) {
+      if (target > arr[mid] && target <= arr[high]) {
+        low = mid + 1;
+      } else {
+        high = mid - 1;
+      }
+    } else if (arr[low] <= arr[mid]) {
+      if (target >= arr[low] && target < arr[mid]) {
+        high = mid - 1;
+      } else {
+        low = mid + 1;
+      }
+    }
+  }
+  return -1;
+};
