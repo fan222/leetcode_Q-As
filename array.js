@@ -475,3 +475,132 @@ var generate = function(numRows) {
 
     return result;
 };
+
+
+// 11. Container With Most Water
+// Use v[low, high] indicates the volume of container with low and high.
+// suppose height[low] < height[high], then we move low to low+1,
+// that means we ingored v[low, high-1],v[low, high-2],etc,
+// if this is safe, then the algorithm is right,
+// and it's obvious that v[low, high-1],high[low, high-2]...... can't
+// be larger than v[low, high] since its width can't be larger than high-low,
+// and its height is limited by height[low].
+var maxArea = function(height) {
+  var l = height.length;
+  var low = 0;
+  var high = l - 1;
+  var result = 0
+  while(low < high){
+      result = Math.max(result, (high - low)*Math.min(height[low], height[high]));
+      console.log(result);
+      if(height[low] < height[high]){
+          low++;
+      } else { high--}
+  }
+  return result;
+};
+
+
+// 15. 3Sum
+// The idea is to sort an input array and then run through all indices
+// of a possible first element of a triplet. For each possible first
+// element we make a standard bi-directional 2Sum sweep of the remaining
+// part of the array. Also we want to skip equal elements to avoid
+// duplicates in the answer without making a set or smt
+
+// The default array sort order is according to string Unicode code points.
+var threeSum = function(nums) {
+    var sorted = nums.sort(function compareNumbers(a, b) {
+        return a - b;
+    });
+    var result = [];
+    for(var i = 0; i < sorted.length - 2; i++){
+        if(i === 0 || (i > 0 && sorted[i] !== sorted[i-1])){
+            var target = 0 - sorted[i];
+            var low = i+1;
+            var high = sorted.length - 1;
+            while(low < high) {
+                if(sorted[low] + sorted[high] === target){
+                    result.push([sorted[i], sorted[low], sorted[high]]);
+                    while(low < high && sorted[low] === sorted[low+1]){low++}
+                    while(low < high && sorted[high] === sorted[high-1]){high--}
+                    low++;
+                    high--;
+                } else if(sorted[low] + sorted[high] < target) {
+                low++} else{
+                high--
+                }
+            }
+        }
+    }
+    return result;
+};
+
+// 16. 3Sum Closest
+var threeSumClosest = function(nums, target) {
+    var sorted = nums.sort(function compareNumbers(a, b) {
+        return a - b;
+    });
+    var result = 10000000000000;
+    for(var i = 0; i < sorted.length - 2; i++){
+        if(i === 0 || (i > 0 && sorted[i] !== sorted[i-1])){
+            var low = i+1;
+            var high = sorted.length - 1;
+            while(low < high) {
+                var temp = sorted[i] + sorted[low] + sorted[high];
+                result = Math.abs(target - result) < Math.abs(target - temp) ? result : temp;
+                if(sorted[i] + sorted[low] + sorted[high] <= target){
+                    low++;
+                } else{
+                    high--
+                }
+            }
+        }
+    }
+    return result;
+};
+
+
+// 18. 4Sum
+// The unshift() method adds one or more elements to the beginning of
+// an array and returns the new length of the new array.
+var fourSum = function(nums, target) {
+    var sorted = nums.sort(function compareNumbers(a, b) {
+        return a - b;
+    });
+    var result = [];
+    for(var i = 0; i < sorted.length - 3; i++){
+        if(i === 0 || (i > 0 && sorted[i] !== sorted[i-1])){
+        var subResult = threeSum(sorted.slice(i+1), target - sorted[i]);
+        subResult.forEach(function(ele) {
+            ele.unshift(sorted[i]);
+            result.push(ele);
+        })
+        }
+    }
+    return result;
+};
+
+var threeSum = function(sorted, sub) {
+    var result = [];
+    for(var i = 0; i < sorted.length - 2; i++){
+        if(i === 0 || (i > 0 && sorted[i] !== sorted[i-1])){
+            var target = sub - sorted[i];
+            var low = i+1;
+            var high = sorted.length - 1;
+            while(low < high) {
+                if(sorted[low] + sorted[high] === target){
+                    result.push([sorted[i], sorted[low], sorted[high]]);
+                    while(low < high && sorted[low] === sorted[low+1]){low++}
+                    while(low < high && sorted[high] === sorted[high-1]){high--}
+                    low++;
+                    high--;
+                } else if(sorted[low] + sorted[high] < target) {
+                low++} else{
+                high--
+                }
+            }
+        }
+    }
+    return result;
+};
